@@ -1,6 +1,6 @@
 const userModel = require('../models/user.model');
 
-module.exports.createUser = async ({email, password}) => {
+module.exports.createUser = async ({ email, password }) => {
     if(!email || !password){
         throw new Error("Email & password are required");
     }
