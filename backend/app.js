@@ -4,6 +4,7 @@ const app = express();
 //external packages
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 //routes
 const userRoutes = require('./routes/user.routes')
@@ -12,6 +13,7 @@ const userRoutes = require('./routes/user.routes')
 const connect = require('./db/db');
 connect();
 
+app.use(cors());
 app.use(cookieParser())
 app.use(morgan('dev'));
 app.use(express.json());
