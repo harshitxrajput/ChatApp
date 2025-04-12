@@ -1,7 +1,8 @@
+import bcrypt from 'bcryptjs';
+
 import { generateToken } from '../lib/utils.js';
 import userModel from '../models/user.model.js';
-
-import bcrypt from 'bcryptjs';
+import cloudinary from '../lib/cloudinary.js';
 
 export const signupController = async (req, res) => {
     const { fullName, email, password } = req.body;
@@ -78,6 +79,37 @@ export const logoutController = async (req, res) => {
     }
     catch(error){
         console.log(`Error in logoutController ${error.message}`);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}
+
+export const updateProfileController = async (req, res) => {
+    try{
+        const { profilePic } = req.body;
+        const userId = req.user._id;
+
+        if(!profilePic) return res.status(400).json({ error: "Profile Pic required" });
+
+        const uploadedResponse = await cloudinary.uploader.upload(profilePic);
+        
+        const updatedUser = await userModel.findByIdAndUpdate(userId, {
+            profilePic: uploadedResponse.secure_url
+        }, { new: true });
+
+        res.status(200).json({ message: "Profile updated successfully", updatedUser });
+    }
+    catch(error){
+        console.log(`Error in updateProfileController: ${error.message}`);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}
+
+export const getProfileController = async (req, res) => {
+    try{
+        res.status(200).json(req.user);
+    }
+    catch(error){
+        console.log(`Error in checkAuthController: ${error.message}`);
         res.status(500).json({ error: "Internal Server Error" });
     }
 }
