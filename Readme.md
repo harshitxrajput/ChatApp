@@ -1,6 +1,6 @@
 # ChatSync - Real-time Chat Application
 
-Live Demo: [ChatSync](https://chatsync-c0xd.onrender.com)
+Live Demo: [https://chatsync-c0xd.onrender.com](https://chatsync-c0xd.onrender.com)
 
 ChatSync is a modern real-time chat application built with the MERN stack (MongoDB, Express.js, React.js, Node.js) that enables users to communicate instantly with each other.
 
