@@ -19,11 +19,18 @@ const SignUpPage = () => {
   const validateForm = () => {
     if(!formData.fullName.trim()) return toast.error("Fullname is required");
     if(!formData.email.trim()) return toast.error("Email is required");
-    
+    if(!/\S+@\S+\.\S+/.test(formData.email)) return toast.error("Inavalid Email format");
+    if(!formData.password) return toast.error("Password is required");
+    if(formData.password.length < 6) return toast.error("Password must be at least 6 characters long");
+
+    return true;
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const success = validateForm();
+
+    if(success === true) signUp(formData)
   }
 
   return (
@@ -53,7 +60,7 @@ const SignUpPage = () => {
                 </div>
                 <input
                   type="text"
-                  className={`input input-bordered w-full pl-10`}
+                  className={`input input-bordered w-full pl-10 outline-none border-none`}
                   placeholder="Harshit Rajput"
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
@@ -72,7 +79,7 @@ const SignUpPage = () => {
                 </div>
                 <input
                   type="email"
-                  className={`input input-bordered w-full pl-10`}
+                  className={`input input-bordered w-full pl-10 outline-none border-none`}
                   placeholder="harshit@rajput.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -91,7 +98,7 @@ const SignUpPage = () => {
                 </div>
                 <input
                   type={showPassword ? "text" : "password"}
-                  className={`input input-bordered w-full pl-10`}
+                  className={`input input-bordered w-full pl-10 outline-none border-none`}
                   placeholder="••••••••"
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
