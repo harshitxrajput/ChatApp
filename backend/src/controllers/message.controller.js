@@ -47,7 +47,7 @@ export const sendMessageController = async (req, res) => {
             imageUrl = uploadedResponse.secure_url;
         }
 
-        const newMessage = messageModel.create({
+        const newMessage = await messageModel.create({
             senderId,
             recieverId,
             text,
