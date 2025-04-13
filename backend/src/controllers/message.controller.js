@@ -56,6 +56,8 @@ export const sendMessageController = async (req, res) => {
 
         await newMessage.save();
 
+        const reciever = 
+
         res.status(201).json(newMessage);
     }
     catch(error){

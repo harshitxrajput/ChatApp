@@ -15,8 +15,10 @@ import HomePage from './pages/HomePage'
 
 const App = () => {
 
-  const { authUser, checkAuth, isCheckingAuth } = useAuthstore();
+  const { authUser, checkAuth, isCheckingAuth, onlineUsers } = useAuthstore();
   const { theme } = useThemeStore();
+
+  console.log({ onlineUsers });
 
   useEffect(() => {
     checkAuth()
