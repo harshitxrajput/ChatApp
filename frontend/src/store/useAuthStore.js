@@ -4,11 +4,11 @@ import toast from 'react-hot-toast';
 
 export const useAuthstore = create((set) => ({
     authUser: null,
+    isCheckingAuth: true,
     isSigningUp: false,
     isLoggingIn: false,
     isUpdatingProfile: false,
 
-    isCheckingAuth: true,
     checkAuth: async () => {
         try{
             const res = await axiosInstance.get("/auth/get-profile");
